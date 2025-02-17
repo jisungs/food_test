@@ -1,9 +1,7 @@
 import requests
+from decouple import config
 
-api_key = 'yDxqGkvLDzB%2BDh5x5ai%2FyXDJbTEbRO8v3HQVC1lTGbXGAK%2BvHL%2BDRMxpETjBicOH8Jjk5mPTfKYnSeAuK%2Btwcw%3D%3D'
-
-API_KEY = 'yDxqGkvLDzB+Dh5x5ai/yXDJbTEbRO8v3HQVC1lTGbXGAK+vHL+DRMxpETjBicOH8Jjk5mPTfKYnSeAuK+twcw=='
-
+API_KEY = config('API_KEY')
 
 
 url = 'http://apis.data.go.kr/6260000/FoodService/getFoodKr'
