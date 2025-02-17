@@ -173,4 +173,14 @@ poetry.toml
 # LSP config files
 pyrightconfig.json
 
+
+#pickles
+stores.pickle
+save_to_csv.py
+stores.pkl 
+cosine_sim.pickle 
+food_data.csv 
+no_image.jpg
+
+
 # End of https://www.toptal.com/developers/gitignore/api/python
