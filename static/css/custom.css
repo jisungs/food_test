@@ -1,0 +1,13 @@
+/* 추가된 테이블 css 클릭되면 색을 변화 시킨다 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  td.clicked {
+    color:white;
+    background-color: #7ecce7; 
+  }
