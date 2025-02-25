@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>이거무라</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- <link rel="icon" type="image/x-icon" href="assets/favicon.ico" /> -->
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -18,11 +18,11 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">이거무라</a>
+                <a class="navbar-brand" href="/">이거무라</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#!">Home</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link" href="#!">About</a></li>
                     </ul>
                     <form class="d-flex">
@@ -51,28 +51,28 @@
                 <table class="table table-bordered table-hover">
                     <tbody>
                       <tr>
-                        <td class="text-center h5">강서구</td>
-                        <td class="text-center h5" >사상구</td>
-                        <td class="text-center h5" >북구</td>
-                        <td class="text-center h5" >금정구</td>
+                        <td class="text-center h5 clickable">강서구</td>
+                        <td class="text-center h5 clickable" >사상구</td>
+                        <td class="text-center h5 clickable" >북구</td>
+                        <td class="text-center h5 clickable" >금정구</td>
                       </tr>
                       <tr>
-                        <td class="text-center h5" >사하구</td>
-                        <td class="text-center h5" >부산진구</td>
-                        <td class="text-center h5" >동래구</td>
-                        <td class="text-center h5" >연제</td>
+                        <td class="text-center h5 clickable" >사하구</td>
+                        <td class="text-center h5 clickable" >부산진구</td>
+                        <td class="text-center h5 clickable" >동래구</td>
+                        <td class="text-center h5 clickable" >연제구</td>
                       </tr>
                       <tr>
-                        <td class="text-center h5" >서구</td>
-                        <td class="text-center h5" >중구</td>
-                        <td class="text-center h5" >동구</td>
-                        <td class="text-center h5" >남구</td>
+                        <td class="text-center h5 clickable" >서구</td>
+                        <td class="text-center h5 clickable" >중구</td>
+                        <td class="text-center h5 clickable" >동구</td>
+                        <td class="text-center h5 clickable" >남구</td>
                       </tr>
                       <tr>
-                        <td class="text-center h5" >영도</td>
-                        <td class="text-center h5" >수영구</td>
-                        <td class="text-center h5" >해운대구</td>
-                        <td class="text-center h5" >기장군</td>
+                        <td class="text-center h5 clickable" >영도구</td>
+                        <td class="text-center h5 clickable" >수영구</td>
+                        <td class="text-center h5 clickable" >해운대구</td>
+                        <td class="text-center h5 clickable" >기장군</td>
                       </tr>
                     </tbody>
                   </table>
@@ -84,31 +84,49 @@
         <section class="py-1">
             <div class="container px-4 px-lg-5 mt-1">
                 <div class="text-center">
-                    <h4 class="fw-bolder">지역별 맛집</h4>
+                    <h4 class="fw-bolder">
+                    부산
+                    {{context.selected_region}}
+                    지역 맛집</h4>
                 </div>
+
                 
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                  <div class="col mb-5">
+                    {% for store in context.store_list %}
+                    <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
+                            <img class="card-img-top" src="{{store.MAIN_IMG_NORMAL}}" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder">Fancy Product</h5>
+                                    <h5 class="fw-bolder">{{store.MAIN_TITLE}}</h5>
+                                    <!-- Product reviews-->
+                                    <div class="d-flex justify-content-center small text-warning mb-2">
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                        <div class="bi-star-fill"></div>
+                                    </div>
                                     <!-- Product price-->
-                                    $40.00 - $80.00
+                                    <h6>메뉴:
+                                        {% for menu in store.RPRSNTV_MENU[:3]%}
+                                        {{menu}}
+                                        {% endfor %}
+                                    </h6>
                                 </div>
                             </div>
                             <!-- Product actions-->
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{url_for('store_detail')}}">상세정보</a></div>
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{{url_for('store_detail' , store_name = store.MAIN_TITLE)}}">상세정보</a></div>
                             </div>
                         </div>
                     </div>
-          
+                    {% endfor %}
                 </div>
+               
             </div>
         </section>
 
@@ -121,5 +139,38 @@
         <!-- Core theme JS-->
         <script src="{{url_for('static', filename='js/index.js')}}"></script>
 
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+            const tableCells = document.querySelectorAll(".clickable");
+
+            tableCells.forEach(cell => {
+                cell.addEventListener("click", function() {
+                    const clickedText = this.textContent.trim();  // 클릭된 <td>의 텍스트 가져오기
+                    console.log("보낼 데이터:", clickedText);
+
+                    fetch("/selected_region", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify({ text: clickedText })  // JSON 데이터 전송
+                    })
+                    .then(response =>{
+                        if(!response.ok){
+                            throw new Error("서버 응답이 정상이 아닙니다.");
+                        }
+                        window.location.reload();//새로 고침하여 데이터 반영
+                    })
+                    // .then(data => {
+                    //     console.log("서버 응답: " + data.message);
+                    // })
+                    .catch(error => {
+                        console.error("오류 발생:", error);
+                        alert("오류 발생: " + error);
+                    });
+                });
+            });
+        });
+        </script>
     </body>
 </html>
