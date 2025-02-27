@@ -18,11 +18,14 @@ def get_recommendations(title):
         else:
             image_path = 'static/images/no_image.jpg'
             images.append(image_path) # Default image path
-
         titles.append(stores['MAIN_TITLE'][i])
 
     return images, titles
 
+def get_menu(title):
+    menus = stores[stores['MAIN_TITLE'] == title]['RPRSNTV_MENU'].values[0]
+    menu = ','.join(menus)
+    return menu
 
 stores = pickle.load(open('stores.pickle', 'rb'))
 cosine_sim = pickle.load(open('cosine_sim.pickle', 'rb'))
@@ -71,7 +74,7 @@ def store_detail(store_name):
         'images' : images,
         'titles' : titles,
     }
-    return render_template('store_detail.html', store_name = store_name, context=context, zip=zip)
+    return render_template('store_detail.html', store_name = store_name, context=context, zip=zip , get_menu = get_menu)
 
 if __name__=='__main__':
     app.run(debug=True, port=8000)
